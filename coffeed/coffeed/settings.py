@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MAIN_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
 # Quick-start development settings - unsuitable for production
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'coffeed.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(MAIN_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -101,8 +102,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
-
 TEMPLATE_DIRS = (
-    PROJECT_PATH + '/templates/',
-    )
+os.path.join(MAIN_DIR, 'templates'),
+)
+
+STATICFILES_DIRS = (
+os.path.join(BASE_DIR, 'static'),
+)
+
+STATIC_ROOT = 'staticfiles'
